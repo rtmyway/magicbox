@@ -15,8 +15,8 @@
     <modules>
         <module>magicbox-core</module>
 
-        <!-- magicbox-support -->
-        <module>magicbox-support/magicbox-support-rocksdb</module>
+        <!-- magicbox-bridge -->
+        <module>magicbox-bridge/magicbox-bridge-rocksdb</module>
         <!-- magicbox-app -->
         <module>magicbox-app/magicbox-demo-app</module>
     </modules>
