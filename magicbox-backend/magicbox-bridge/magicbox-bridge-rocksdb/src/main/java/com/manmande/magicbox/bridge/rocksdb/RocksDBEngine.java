@@ -162,9 +162,10 @@ public class RocksDBEngine<T> {
         // 获取列族处理器
         ColumnFamilyHandle cfh = getColumnFamilyHandle(tenant, group);
         List<byte[]> keyBytesList = keyList.stream().map(item -> item.getBytes(StandardCharsets.UTF_8)).collect(Collectors.toList());
-
+        ColumnFamilyHandle[] cfhArray = new ColumnFamilyHandle[keyList.size()];
+        Arrays.fill(cfhArray, cfh);
         try {
-            List<byte[]> valueBytesList = rocksDB.multiGetAsList(Arrays.asList(cfh), keyBytesList);
+            List<byte[]> valueBytesList = rocksDB.multiGetAsList(Arrays.asList(cfhArray), keyBytesList);
             for (byte[] valueBytes : valueBytesList) {
                 if (valueBytes != null) {
                     itemList.add(this.deserialize(valueBytes));
