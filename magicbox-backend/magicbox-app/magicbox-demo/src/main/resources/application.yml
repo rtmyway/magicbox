@@ -1,0 +1,9 @@
+
+spring:
+  application:
+    name: magicbox-app
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://192.168.199.51:25101/glasses-dev?useUnicode=true&serverTimezone=Asia/Shanghai&characterEncoding=UTF-8&allowMultiQueries=true
+    username: root
+    password: 123456
