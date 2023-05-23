@@ -1,4 +1,4 @@
-package com.manmande.magicbox.core.web.vo;
+package com.manmande.magicbox.core.web;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

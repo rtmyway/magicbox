@@ -9,7 +9,7 @@
 package com.manmande.magicbox.core.web.handler;
 
 import com.manmande.magicbox.core.exception.BusinessException;
-import com.manmande.magicbox.core.web.vo.R;
+import com.manmande.magicbox.core.web.R;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
@@ -50,7 +50,7 @@ public class ResponseHandler implements ResponseBodyAdvice {
 
     @ResponseBody
     @ExceptionHandler(value = { Exception.class })
-    public ResponseEntity<Object> handleException(final Exception e, final ServletWebRequest req) {
+    public ResponseEntity<R> handleException(final Exception e, final ServletWebRequest req) {
         //获取接口路径
         String apiUrl = req.getRequest().getServletPath();
         String[] paramArray = {};
