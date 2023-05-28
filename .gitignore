@@ -28,3 +28,4 @@ HELP.md
 
 ### VS Code ###
 .vscode/
+/magicbox-frontend/magixbox-card-ui/node_modules/
