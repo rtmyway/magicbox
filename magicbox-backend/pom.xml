@@ -20,7 +20,7 @@
     <modules>
         <module>magicbox-core</module>
         <module>magicbox-app/magicbox-demo</module>
-        <module>magicbox-app/magicbox-app-card</module>
+        <module>magicbox-app/magicbox-card-app</module>
     </modules>
 
     <properties>
