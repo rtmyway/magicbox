@@ -1,8 +1,14 @@
 package com.manmande.magicbox.core.mybatis;
 
+import cn.hutool.extra.spring.SpringUtil;
+import com.baomidou.mybatisplus.annotation.DbType;
+import com.baomidou.mybatisplus.autoconfigure.ConfigurationCustomizer;
 import com.baomidou.mybatisplus.core.MybatisConfiguration;
 import com.baomidou.mybatisplus.core.config.GlobalConfig;
 import com.baomidou.mybatisplus.core.handlers.MybatisEnumTypeHandler;
+import com.baomidou.mybatisplus.extension.plugins.MybatisPlusInterceptor;
+import com.baomidou.mybatisplus.extension.plugins.inner.OptimisticLockerInnerInterceptor;
+import com.baomidou.mybatisplus.extension.plugins.inner.PaginationInnerInterceptor;
 import com.baomidou.mybatisplus.extension.spring.MybatisSqlSessionFactoryBean;
 import com.manmande.magicbox.core.mybatis.handler.AutoFillHandler;
 import lombok.extern.slf4j.Slf4j;
@@ -28,6 +34,18 @@ public class MybatisPlusConfig {
         return resources;
     }
 
+    /**
+     * 新增分页拦截器，并设置数据库类型为mysql
+     */
+    @Bean
+    public MybatisPlusInterceptor mybatisPlusInterceptor() {
+        MybatisPlusInterceptor interceptor = new MybatisPlusInterceptor();
+        interceptor.addInnerInterceptor(new PaginationInnerInterceptor(DbType.MYSQL));
+        return interceptor;
+    }
+
+
+
     @Bean
     public MybatisConfiguration mybatisConfiguration() {
         MybatisConfiguration config = new MybatisConfiguration();
@@ -37,7 +55,6 @@ public class MybatisPlusConfig {
         config.setCacheEnabled(false);
         config.setLogImpl(StdOutImpl.class);
         config.setDefaultEnumTypeHandler(MybatisEnumTypeHandler.class);
-
         return config;
     }
 
@@ -53,7 +70,9 @@ public class MybatisPlusConfig {
         globalConfig.setBanner(false);
         globalConfig.setMetaObjectHandler(new AutoFillHandler());
         sqlSessionFactory.setGlobalConfig(globalConfig);
-        sqlSessionFactory.setPlugins(new Interceptor[]{});
+
+
+        sqlSessionFactory.setPlugins(new Interceptor[]{mybatisPlusInterceptor()});
         return sqlSessionFactory.getObject();
     }
 }

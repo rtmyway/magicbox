@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.manmande.magicbox.card.mapper.TsCardMapper">
+
+    <select id="selectCardPage" resultType="com.manmande.magicbox.card.po.TsCardPo">
+        select * from ts_card t
+        where 1 = 1
+        <if test="searchValue!=null and searchValue!='' ">
+            and (t.card_no like concat('%',#{searchValue},'%') or t.phone like concat('%',#{searchValue},'%'))
+        </if>
+        order by t.card_no desc
+
+    </select>
+</mapper>
