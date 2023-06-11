@@ -24,7 +24,7 @@ public class MybatisPlusConfig {
 
     @Bean
     public Resource[] mapperResources() throws IOException {
-        Resource[] resources = new PathMatchingResourcePatternResolver().getResources("classpath*:com/**/mapper/**/*.xml");
+        Resource[] resources = new PathMatchingResourcePatternResolver().getResources("classpath*:/mapper/**/*.xml");
         return resources;
     }
 

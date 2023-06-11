@@ -3,6 +3,7 @@ package com.manmande.magicbox.core.action;
 
 import com.manmande.magicbox.core.exception.BusinessException;
 import com.manmande.magicbox.core.web.dto.PageDto;
+import com.manmande.magicbox.core.web.req.PageReq;
 
 import java.util.List;
 
@@ -15,5 +16,5 @@ public interface BaseAction<T> {
 
     Boolean disable(T t) throws BusinessException;
     List<T> list() throws BusinessException;
-    PageDto listPage(PageDto pageDto) throws BusinessException;
+    PageDto listPage(PageReq pageReq) throws BusinessException;
 }
