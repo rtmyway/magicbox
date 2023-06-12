@@ -1,0 +1,7 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://taozhen.tpddns.cn:25201/magicbox_card?useUnicode=true&serverTimezone=Asia/Shanghai&characterEncoding=UTF-8&allowMultiQueries=true
+    username: root
+    password: 123456
+
