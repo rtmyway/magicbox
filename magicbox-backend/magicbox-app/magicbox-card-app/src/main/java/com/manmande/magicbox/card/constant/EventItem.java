@@ -1,15 +1,17 @@
 package com.manmande.magicbox.card.constant;
 
 public enum EventItem {
-    APPLY("APPLY", "提交", 1),
-    CONFIRM("CONFIRM", "确认", 2),
-    DELIVER("DELIVER", "已发货", 3),
-    FINISH("FINISH", "已完成", 4),
+    INIT("INIT", "未销售", 0),
+    SOLD("SOLD", "已销售", 1),
+    APPLY("APPLY", "提货申请", 2),
+    CONFIRM("CONFIRM", "提货确认", 3),
+    DELIVER("DELIVER", "已发货", 4),
+    FINISH("FINISH", "已完成", 5),
 
     /**
      * 未知数
      */
-    UNKNOWN("UNKNOWN", "", 0);
+    UNKNOWN("UNKNOWN", "", 999);
 
     private String code;
     private String text;

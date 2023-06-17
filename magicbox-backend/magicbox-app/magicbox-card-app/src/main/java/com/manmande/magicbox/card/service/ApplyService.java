@@ -51,9 +51,12 @@ public class ApplyService {
             throw new BusinessException("卡号或密码错误");
         }
 
-        List<TsConsumerApplyPo> applyPoList = tsConsumerApplyMapper.selectList(new QueryWrapper<TsConsumerApplyPo>().eq("card_no", req.getCardNo()));
-        if (!applyPoList.isEmpty()) {
-            throw new BusinessException("已提交");
+        List<TlCardEventLogPo> eventLogPoList = tlCardEventLogMapper.selectList(new QueryWrapper<TlCardEventLogPo>().eq("card_no", req.getCardNo()).orderByAsc("created_at"));
+        TlCardEventLogPo lastPo = eventLogPoList.get(eventLogPoList.size() - 1);
+        EventItem lastEventItem = EventItem.getByCode(lastPo.getEventItem());
+
+        if (!lastEventItem.getOrder().equals(EventItem.SOLD.getOrder())) {
+            throw new BusinessException("此卡状态异常，请联销售人员");
         }
 
         TsConsumerApplyPo applyPo = new TsConsumerApplyPo();
@@ -61,11 +64,14 @@ public class ApplyService {
         applyPo.setPhone(req.getPhone());
         applyPo.setRealName(req.getRealName());
         applyPo.setAddressInfo(req.getAddressInfo());
+        applyPo.setExpectedDate(req.getExpectedDate());
+        applyPo.setDescription(req.getDescription());
         tsConsumerApplyMapper.insert(applyPo);
 
         TlCardEventLogPo eventLogPo = new TlCardEventLogPo();
         eventLogPo.setCardNo(req.getCardNo());
         eventLogPo.setEventItem(EventItem.APPLY.getCode());
+        eventLogPo.setDescription(req.getDescription());
         tlCardEventLogMapper.insert(eventLogPo);
         return true;
     }
@@ -77,16 +83,7 @@ public class ApplyService {
             throw new BusinessException("卡不存在");
         }
 
-        List<TsConsumerApplyPo> applyPoList = tsConsumerApplyMapper.selectList(new QueryWrapper<TsConsumerApplyPo>().eq("card_no", tsCardPo.getCardNo()));
-        if (applyPoList.isEmpty()) {
-            throw new BusinessException("未提交");
-        }
-
         List<TlCardEventLogPo> eventLogPoList = tlCardEventLogMapper.selectList(new QueryWrapper<TlCardEventLogPo>().eq("card_no", tsCardPo.getCardNo()).orderByAsc("created_at"));
-        if (eventLogPoList.isEmpty()) {
-            throw new BusinessException("未提交");
-        }
-
         TlCardEventLogPo lastPo = eventLogPoList.get(eventLogPoList.size() - 1);
         EventItem lastEventItem = EventItem.getByCode(lastPo.getEventItem());
         EventItem newEventItem = EventItem.getByCode(req.getEventItemCode());
@@ -95,9 +92,22 @@ public class ApplyService {
             throw new BusinessException("操作错误");
         }
 
+        if (newEventItem.getCode().equals(EventItem.APPLY.getCode())) {
+            // 插入申请记录
+            TsConsumerApplyPo applyPo = new TsConsumerApplyPo();
+            applyPo.setCardNo(tsCardPo.getCardNo());
+            applyPo.setPhone(req.getPhone());
+            applyPo.setRealName(req.getRealName());
+            applyPo.setAddressInfo(req.getAddressInfo());
+            applyPo.setExpectedDate(req.getExpectedDate());
+            applyPo.setDescription(req.getDescription());
+            tsConsumerApplyMapper.insert(applyPo);
+        }
+
         TlCardEventLogPo eventLogPo = new TlCardEventLogPo();
         eventLogPo.setCardNo(tsCardPo.getCardNo());
         eventLogPo.setEventItem(newEventItem.getCode());
+        eventLogPo.setDescription(req.getDescription());
         tlCardEventLogMapper.insert(eventLogPo);
         return true;
     }

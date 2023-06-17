@@ -6,7 +6,14 @@
         select * from ts_card t
         where 1 = 1
         <if test="searchValue!=null and searchValue!='' ">
-            and (t.card_no like concat('%',#{searchValue},'%') or t.phone like concat('%',#{searchValue},'%'))
+            and (t.card_no like concat('%',#{searchValue},'%')
+            or t.card_no in (
+                select a.card_no
+                from ts_consumer_apply a
+                where a.phone like concat('%',#{searchValue},'%')
+                    or a.real_name like concat('%',#{searchValue},'%')
+                    or a.address_info  like concat('%',#{searchValue},'%'))
+            )
         </if>
         order by t.card_no desc
 

@@ -13,4 +13,5 @@ public class TsConsumerApplyPo extends AuditPo {
     private String cardNo;
     private String realName;
     private String addressInfo;
+    private String expectedDate;
 }

@@ -5,6 +5,7 @@ import cn.hutool.core.util.RandomUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.manmande.magicbox.card.constant.CardItem;
+import com.manmande.magicbox.card.constant.EventItem;
 import com.manmande.magicbox.card.dto.CardDetailDto;
 import com.manmande.magicbox.card.mapper.TlCardEventLogMapper;
 import com.manmande.magicbox.card.mapper.TsCardMapper;
@@ -55,6 +56,11 @@ public class CardService implements BaseAction<TsCardPo> {
             tsCardPo.setPrice(CardItem.DEFAULT.getPrice());
             tsCardPo.setBatchNo(batchNo);
             tsCardMapper.insert(tsCardPo);
+
+            TlCardEventLogPo tlCardEventLogPo = new TlCardEventLogPo();
+            tlCardEventLogPo.setCardNo(tsCardPo.getCardNo());
+            tlCardEventLogPo.setEventItem(EventItem.INIT.getCode());
+            tlCardEventLogMapper.insert(tlCardEventLogPo);
         }
         return true;
     }
@@ -77,7 +83,11 @@ public class CardService implements BaseAction<TsCardPo> {
 
     @Override
     public Boolean update(TsCardPo tsCardPo) throws BusinessException {
-        tsCardMapper.updateById(tsCardPo);
+        TsCardPo po = tsCardMapper.selectById(tsCardPo.getId());
+        if (po != null) {
+            po.setDescription(tsCardPo.getDescription());
+            tsCardMapper.updateById(po);
+        }
         return true;
     }
 

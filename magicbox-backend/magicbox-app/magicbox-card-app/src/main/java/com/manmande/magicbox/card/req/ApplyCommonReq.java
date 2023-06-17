@@ -9,4 +9,6 @@ public class ApplyCommonReq {
     private String cardPassword;
     private String realName;
     private String addressInfo;
+    private String expectedDate;
+    private String description;
 }
