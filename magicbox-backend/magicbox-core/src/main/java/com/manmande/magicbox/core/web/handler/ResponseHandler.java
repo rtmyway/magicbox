@@ -74,6 +74,6 @@ public class ResponseHandler implements ResponseBodyAdvice {
         } catch (NoSuchMessageException ne) {
             errorMsg = errorCode;
         }
-        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(R.error(errorMsg));
+        return ResponseEntity.status(HttpStatus.OK).body(R.error(errorMsg));
     }
 }
