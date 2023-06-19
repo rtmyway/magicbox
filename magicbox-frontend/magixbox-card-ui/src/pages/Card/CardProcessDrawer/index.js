@@ -42,7 +42,7 @@ export default class CardProcessAddDrawer extends Component {
       dataObj.phone = viewObj.data.phone,
       dataObj.realName = viewObj.data.realName,
       dataObj.addressInfo = viewObj.data.addressInfo,
-      dataObj.expectedDate = viewObj.data.expectedDate,
+      // dataObj.expectedDate = viewObj.data.expectedDate,
       dataObj.description = viewObj.data.description;
     }
     this.setState({
@@ -81,6 +81,8 @@ export default class CardProcessAddDrawer extends Component {
         return;
       }
     }
+
+    console.info(this.state);
     this.props.viewObj.onSubViewActionHandler(this.props.viewObj.key, 'CONFIRM', dataObj);
   }
 

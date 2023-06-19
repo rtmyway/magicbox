@@ -54,6 +54,7 @@ public class CardService implements BaseAction<TsCardPo> {
             tsCardPo.setCardName(CardItem.DEFAULT.getText());
             tsCardPo.setCardPassword(RandomUtil.randomString(RandomUtil.BASE_NUMBER, 6));
             tsCardPo.setPrice(CardItem.DEFAULT.getPrice());
+            tsCardPo.setCurrentEventItem(EventItem.INIT.getCode());
             tsCardPo.setBatchNo(batchNo);
             tsCardMapper.insert(tsCardPo);
 
@@ -77,7 +78,14 @@ public class CardService implements BaseAction<TsCardPo> {
 
     @Override
     public Boolean remove(TsCardPo tsCardPo) throws BusinessException {
-        tsCardMapper.deleteById(tsCardPo.getId());
+        TsCardPo po = tsCardMapper.selectById(tsCardPo.getId());
+        if (po != null) {
+            tsConsumerApplyMapper.delete(new QueryWrapper<TsConsumerApplyPo>().eq("card_no", po.getCardNo()));
+            tlCardEventLogMapper.delete(new QueryWrapper<TlCardEventLogPo>().eq("card_no", po.getCardNo()));
+            tsCardMapper.deleteById(tsCardPo.getId());
+        }
+
+
         return true;
     }
 
@@ -110,7 +118,12 @@ public class CardService implements BaseAction<TsCardPo> {
     public PageDto listPage(PageReq pageReq) throws BusinessException {
         Page<TsCardPo> page = new Page<>(pageReq.getPageNum(), pageReq.getPageSize());
         Object searchValueObj = pageReq.getParams().get("searchValue");
-        tsCardMapper.selectCardPage(page, searchValueObj == null ? "" : String.valueOf(searchValueObj));
+        Object eventItemObj = pageReq.getParams().get("eventItem");
+        tsCardMapper.selectCardPage(
+                page,
+                searchValueObj == null ? "" : String.valueOf(searchValueObj),
+                eventItemObj == null ? "" : String.valueOf(eventItemObj)
+        );
 
         PageDto pageDto = new PageDto();
         pageDto.setTotal(page.getTotal());

@@ -7,5 +7,5 @@ import com.manmande.magicbox.card.po.TsCardPo;
 import org.apache.ibatis.annotations.Param;
 
 public interface TsCardMapper extends BaseMapper<TsCardPo> {
-    IPage<TsCardPo> selectCardPage(Page<?> page, @Param("searchValue") String searchValue);
+    IPage<TsCardPo> selectCardPage(Page<?> page, @Param("searchValue") String searchValue, @Param("eventItem") String eventItem);
 }

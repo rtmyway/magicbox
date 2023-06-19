@@ -15,6 +15,9 @@
                     or a.address_info  like concat('%',#{searchValue},'%'))
             )
         </if>
+        <if test="eventItem!=null and eventItem!='' ">
+            and t.current_event_item = #{eventItem}
+        </if>
         order by t.card_no desc
 
     </select>

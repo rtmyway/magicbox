@@ -51,6 +51,8 @@ public class ApplyService {
             throw new BusinessException("卡号或密码错误");
         }
 
+        TsCardPo cardPo = poList.get(0);
+
         List<TlCardEventLogPo> eventLogPoList = tlCardEventLogMapper.selectList(new QueryWrapper<TlCardEventLogPo>().eq("card_no", req.getCardNo()).orderByAsc("created_at"));
         TlCardEventLogPo lastPo = eventLogPoList.get(eventLogPoList.size() - 1);
         EventItem lastEventItem = EventItem.getByCode(lastPo.getEventItem());
@@ -73,6 +75,9 @@ public class ApplyService {
         eventLogPo.setEventItem(EventItem.APPLY.getCode());
         eventLogPo.setDescription(req.getDescription());
         tlCardEventLogMapper.insert(eventLogPo);
+
+        cardPo.setCurrentEventItem(EventItem.APPLY.getCode());
+        tsCardMapper.updateById(cardPo);
         return true;
     }
 
@@ -109,6 +114,9 @@ public class ApplyService {
         eventLogPo.setEventItem(newEventItem.getCode());
         eventLogPo.setDescription(req.getDescription());
         tlCardEventLogMapper.insert(eventLogPo);
+
+        tsCardPo.setCurrentEventItem(newEventItem.getCode());
+        tsCardMapper.updateById(tsCardPo);
         return true;
     }
 }

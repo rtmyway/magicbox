@@ -12,4 +12,5 @@ public class TsCardPo extends AuditPo {
     private String cardPassword;
     private Integer price;
     private String batchNo;
+    private String currentEventItem;
 }

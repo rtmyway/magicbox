@@ -20,6 +20,7 @@ export default class DbmtBackupRestoreMain extends Component {
       loading: false,
       data: [],
       searchValue: '',
+      eventItem: '',
       pagination: {
         total: 0,
         current: 1,
@@ -45,7 +46,7 @@ export default class DbmtBackupRestoreMain extends Component {
     const reqParam = {
       pageNum : pageNum,
       pageSize : pageSize,
-      params: {searchValue: this.state.searchValue},
+      params: {searchValue: this.state.searchValue, eventItem: this.state.eventItem},
     };
     // 加载状态=>加载中
     this.setState({loading: true,});
@@ -103,8 +104,10 @@ export default class DbmtBackupRestoreMain extends Component {
     e.preventDefault();
     this.props.form.validateFields((err, values) => {
       let searchValue = values.searchValue == undefined ? '' : values.searchValue;
+      let eventItem = values.eventItem == undefined ? '' : values.eventItem;
       this.setState({
         searchValue: searchValue,
+        eventItem: eventItem,
       }, ()=>{this.doLoadListPage(1, this.state.pagination.pageSize);});
     });
   }
@@ -317,14 +320,14 @@ export default class DbmtBackupRestoreMain extends Component {
 
           return <div>{applyDom}</div>
         },
-      // },{
-      //   key : 9,
-      //   title: '操作',
-      //   render: (text, row, index) => {
-      //     return <div>
-      //       <a style={{fontWeight:'bold', marginLeft: '30px', color: 'red'}} onClick={()=>{this.doRemove(row);}}>{'删除'}</a>
-      //     </div>
-      //   },
+      },{
+        key : 9,
+        title: '操作',
+        render: (text, row, index) => {
+          return <div>
+            <a style={{fontWeight:'bold', marginLeft: '30px', color: 'red'}} onClick={()=>{this.doRemove(row);}}>{'删除'}</a>
+          </div>
+        },
       },
     ];
 
@@ -348,8 +351,23 @@ export default class DbmtBackupRestoreMain extends Component {
                   <Input placeholder="检索 卡号|提货手机号|提货人姓名|提货人地址" />
                 )}
               </FormItem>
-            </Col>            
-            <Col className='ant-col-offset-14' span={2}>
+            </Col>       
+            <Col span={4}>
+              <FormItem label="状态:">
+                {getFieldDecorator('eventItem', {initialValue:''})(
+                  <Select style={{ width: '100%'}} >
+                    <Option value="">全部</Option>
+                    <Option value="INIT">初始化</Option>
+                    <Option value="SOLD">已售出</Option>
+                    <Option value="APPLY">提货已申请</Option>
+                    <Option value="CONFIRM">提货已确认</Option>
+                    <Option value="DELIVER">已发货</Option>
+                    <Option value="FINISH">已完成</Option>
+                  </Select>
+                )}
+              </FormItem>
+            </Col>                 
+            <Col className='ant-col-offset-10' span={2}>
               <FormItem>
                 <Button type="default" htmlType="submit" style={{ width: '100%'}}>查询</Button>
               </FormItem>
