@@ -34,3 +34,6 @@ HELP.md
 /magixbox-card-mobile/node_modules
 /magixbox-card-mobile/dist
 /magixbox-card-mobile/.temp/ant-design-pro.less
+/magicbox-frontend/magicbox-card-mobile/node_modules/
+/magicbox-frontend/magicbox-card-mobile/dist
+/magicbox-frontend/magicbox-card-mobile/.temp/ant-design-pro.less
