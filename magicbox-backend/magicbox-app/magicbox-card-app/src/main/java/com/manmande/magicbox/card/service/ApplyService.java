@@ -33,8 +33,7 @@ public class ApplyService {
             throw new BusinessException("卡号或密码错误");
         }
         ApplyDetailDto dto = new ApplyDetailDto();
-        dto.setCardNo(poList.get(0).getCardNo());
-        dto.setCardName(poList.get(0).getCardName());
+        dto.setCardPo(poList.get(0));
         List<TsConsumerApplyPo> applyPoList = tsConsumerApplyMapper.selectList(new QueryWrapper<TsConsumerApplyPo>().eq("card_no", req.getCardNo()));
         if (!applyPoList.isEmpty()) {
             dto.setApplyPo(applyPoList.get(0));
