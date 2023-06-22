@@ -20,12 +20,12 @@ export function _onCreate() {
     app.use(plugin);
   });
   
-  app.model({ namespace: 'global', ...(require('/home/taozhen/repo/git_repo/github/magicbox/magicbox-frontend/magixbox-card-mobile/src/models/global.js').default) });
-app.model({ namespace: 'list', ...(require('/home/taozhen/repo/git_repo/github/magicbox/magicbox-frontend/magixbox-card-mobile/src/models/list.js').default) });
-app.model({ namespace: 'login', ...(require('/home/taozhen/repo/git_repo/github/magicbox/magicbox-frontend/magixbox-card-mobile/src/models/login.js').default) });
-app.model({ namespace: 'project', ...(require('/home/taozhen/repo/git_repo/github/magicbox/magicbox-frontend/magixbox-card-mobile/src/models/project.js').default) });
-app.model({ namespace: 'setting', ...(require('/home/taozhen/repo/git_repo/github/magicbox/magicbox-frontend/magixbox-card-mobile/src/models/setting.js').default) });
-app.model({ namespace: 'user', ...(require('/home/taozhen/repo/git_repo/github/magicbox/magicbox-frontend/magixbox-card-mobile/src/models/user.js').default) });
+  app.model({ namespace: 'global', ...(require('/home/taozhen/repo/git_repo/github/magicbox/magicbox-frontend/magicbox-card-mobile/src/models/global.js').default) });
+app.model({ namespace: 'list', ...(require('/home/taozhen/repo/git_repo/github/magicbox/magicbox-frontend/magicbox-card-mobile/src/models/list.js').default) });
+app.model({ namespace: 'login', ...(require('/home/taozhen/repo/git_repo/github/magicbox/magicbox-frontend/magicbox-card-mobile/src/models/login.js').default) });
+app.model({ namespace: 'project', ...(require('/home/taozhen/repo/git_repo/github/magicbox/magicbox-frontend/magicbox-card-mobile/src/models/project.js').default) });
+app.model({ namespace: 'setting', ...(require('/home/taozhen/repo/git_repo/github/magicbox/magicbox-frontend/magicbox-card-mobile/src/models/setting.js').default) });
+app.model({ namespace: 'user', ...(require('/home/taozhen/repo/git_repo/github/magicbox/magicbox-frontend/magicbox-card-mobile/src/models/user.js').default) });
   return app;
 }
 

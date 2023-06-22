@@ -18,7 +18,10 @@ export default class CardInfo extends Component {
       loading: false,
       dataObj: {
         cardNo: '',
+        cardName: '', 
         cardPassword: '',
+        applyPo: {},
+        eventLogPoList: [],
       },
 
     };
@@ -26,7 +29,13 @@ export default class CardInfo extends Component {
 
   //render前执行
   componentWillMount() {
-    console.info(this.props.location.query);
+    let dataObj = this.state.dataObj;
+    let carryObj = this.props.location.state;
+    dataObj = {...carryObj};
+
+    this.setState({
+      dataObj: dataObj,
+    });
     
   }
 
@@ -63,7 +72,7 @@ export default class CardInfo extends Component {
   render() {
     
     return (
-      <PageHeaderWrapper title="sss">
+      <PageHeaderWrapper title="">
         <Row>
           
         </Row>        

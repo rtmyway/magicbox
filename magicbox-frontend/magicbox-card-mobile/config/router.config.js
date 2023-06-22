@@ -5,6 +5,12 @@ export default [
     Routes: ['src/pages/Authorized'],
     routes: [
       {
+        path: '/',
+        name: 'card-main',
+        icon: 'solution',
+        component: './Card/CardMain',
+      },        
+      {
         path: '/consumer/card-query',
         name: 'card-query',
         icon: 'solution',

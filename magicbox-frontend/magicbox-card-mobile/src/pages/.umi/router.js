@@ -8,7 +8,7 @@ import {
 import dynamic from 'umi/dynamic';
 import renderRoutes from 'umi/lib/renderRoutes';
 import history from '@@/history';
-import RendererWrapper0 from '/home/taozhen/repo/git_repo/github/magicbox/magicbox-frontend/magixbox-card-mobile/src/pages/.umi/LocaleWrapper.jsx';
+import RendererWrapper0 from '/home/taozhen/repo/git_repo/github/magicbox/magicbox-frontend/magicbox-card-mobile/src/pages/.umi/LocaleWrapper.jsx';
 import _dvaDynamic from 'dva/dynamic';
 
 const Router = require('dva/router').routerRedux.ConnectedRouter;
@@ -19,12 +19,25 @@ const routes = [
     component: __IS_BROWSER
       ? _dvaDynamic({
           component: () => import('../../layouts/BlankLayout'),
-          LoadingComponent: require('/home/taozhen/repo/git_repo/github/magicbox/magicbox-frontend/magixbox-card-mobile/src/components/PageLoading/index')
+          LoadingComponent: require('/home/taozhen/repo/git_repo/github/magicbox/magicbox-frontend/magicbox-card-mobile/src/components/PageLoading/index')
             .default,
         })
       : require('../../layouts/BlankLayout').default,
     Routes: [require('../Authorized').default],
     routes: [
+      {
+        path: '/',
+        name: 'card-main',
+        icon: 'solution',
+        component: __IS_BROWSER
+          ? _dvaDynamic({
+              component: () => import('../Card/CardMain'),
+              LoadingComponent: require('/home/taozhen/repo/git_repo/github/magicbox/magicbox-frontend/magicbox-card-mobile/src/components/PageLoading/index')
+                .default,
+            })
+          : require('../Card/CardMain').default,
+        exact: true,
+      },
       {
         path: '/consumer/card-query',
         name: 'card-query',
@@ -32,7 +45,7 @@ const routes = [
         component: __IS_BROWSER
           ? _dvaDynamic({
               component: () => import('../Card/CardQuery'),
-              LoadingComponent: require('/home/taozhen/repo/git_repo/github/magicbox/magicbox-frontend/magixbox-card-mobile/src/components/PageLoading/index')
+              LoadingComponent: require('/home/taozhen/repo/git_repo/github/magicbox/magicbox-frontend/magicbox-card-mobile/src/components/PageLoading/index')
                 .default,
             })
           : require('../Card/CardQuery').default,
@@ -45,7 +58,7 @@ const routes = [
         component: __IS_BROWSER
           ? _dvaDynamic({
               component: () => import('../Card/CardInfo'),
-              LoadingComponent: require('/home/taozhen/repo/git_repo/github/magicbox/magicbox-frontend/magixbox-card-mobile/src/components/PageLoading/index')
+              LoadingComponent: require('/home/taozhen/repo/git_repo/github/magicbox/magicbox-frontend/magicbox-card-mobile/src/components/PageLoading/index')
                 .default,
             })
           : require('../Card/CardInfo').default,
@@ -54,7 +67,7 @@ const routes = [
       {
         component: () =>
           React.createElement(
-            require('/home/taozhen/repo/git_repo/github/magicbox/magicbox-frontend/magixbox-card-mobile/node_modules/umi-build-dev/lib/plugins/404/NotFound.js')
+            require('/home/taozhen/repo/git_repo/github/magicbox/magicbox-frontend/magicbox-card-mobile/node_modules/umi-build-dev/lib/plugins/404/NotFound.js')
               .default,
             { pagesPath: 'src/pages', hasRoutesInConfig: true },
           ),
@@ -64,7 +77,7 @@ const routes = [
   {
     component: () =>
       React.createElement(
-        require('/home/taozhen/repo/git_repo/github/magicbox/magicbox-frontend/magixbox-card-mobile/node_modules/umi-build-dev/lib/plugins/404/NotFound.js')
+        require('/home/taozhen/repo/git_repo/github/magicbox/magicbox-frontend/magicbox-card-mobile/node_modules/umi-build-dev/lib/plugins/404/NotFound.js')
           .default,
         { pagesPath: 'src/pages', hasRoutesInConfig: true },
       ),

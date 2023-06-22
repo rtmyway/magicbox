@@ -52,7 +52,24 @@ export default class CardQuery extends Component {
       if (response== undefined || response == null) {
         console.info('false');
       } else {
-        this.props.history.push({pathname:'/consumer/card-info',query: response.data});
+        let cardPo = response.data.cardPo;
+        let eventItem = cardPo.currentEventItem;
+
+        if (cardPo == null) {
+          message.error('卡券状态异常，请联系卖家');
+          return;
+        }
+
+        if (eventItem == 'INIT') {
+          message.error('卡券状态异常，请联系卖家');
+          return;
+        }
+
+        if (eventItem == 'SOLD') {
+          this.props.history.push({pathname:'/consumer/card-apply',state: response.data});
+        } else {
+          this.props.history.push({pathname:'/consumer/card-info',state: response.data});
+        }
       }
       
     });
