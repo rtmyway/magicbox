@@ -36,3 +36,10 @@ HELP.md
 /magicbox-frontend/magicbox-card-mobile/dist
 /magicbox-frontend/magicbox-card-mobile/.temp/ant-design-pro.less
 
+/magicbox-frontend/magicbox-card-ui/src/pages/.umi/LocaleWrapper.jsx
+/magicbox-frontend/magicbox-card-ui/src/pages/.umi/dva.js
+/magicbox-frontend/magicbox-card-ui/src/pages/.umi/history.js
+/magicbox-frontend/magicbox-card-ui/src/pages/.umi/polyfills.js
+/magicbox-frontend/magicbox-card-ui/src/pages/.umi/router.js
+/magicbox-frontend/magicbox-card-ui/src/pages/.umi/umi.js
+/magicbox-frontend/magicbox-card-ui/src/pages/.umi/umiExports.ts
