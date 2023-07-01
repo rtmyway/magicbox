@@ -2,7 +2,7 @@ export default [
   {
     path: '/',
     component: '../layouts/BlankLayout',
-    Routes: ['src/pages/Authorized'],
+    // Routes: ['src/pages/Authorized'],
     routes: [
       {
         path: '/',
@@ -21,7 +21,13 @@ export default [
         name: 'card-info',
         icon: 'solution',
         component: './Card/CardInfo',
-      },                                                     
+      },    
+      {
+        path: '/consumer/card-apply',
+        name: 'card-apply',
+        icon: 'solution',
+        component: './Card/CardApply',
+      },                                                          
     ],
   },
 
