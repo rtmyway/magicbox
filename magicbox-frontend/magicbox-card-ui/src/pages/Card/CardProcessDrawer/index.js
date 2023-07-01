@@ -82,7 +82,6 @@ export default class CardProcessAddDrawer extends Component {
       }
     }
 
-    console.info(this.state);
     this.props.viewObj.onSubViewActionHandler(this.props.viewObj.key, 'CONFIRM', dataObj);
   }
 
