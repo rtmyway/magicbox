@@ -13,7 +13,7 @@ const cardApiUrl = {
 // applyApiUrl
 const applyApiUrl = {
     load: '/apply/load', //加载
-    remove: '/apply/add', //增加
+    add: '/apply/add', //增加
     process: '/apply/process', //处理
 }
 
